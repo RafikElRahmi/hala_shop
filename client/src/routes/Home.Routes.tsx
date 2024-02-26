@@ -1,7 +1,7 @@
 import { Suspense, lazy } from "react";
+import Spinner from "../components/Layouts/load-spiner/Spinner";
 import Routes from "../Constants/Routes";
 const Home = lazy(() => import("../pages/Home"));
-const Spinner = lazy(() => import("../components/Layouts/load-spiner/Spinner"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 
 export default {

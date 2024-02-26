@@ -3,7 +3,7 @@ import router from './routes/index.Routes';
 
 function App() {
 
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />
 }
 
 export default App

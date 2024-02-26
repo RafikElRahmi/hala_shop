@@ -2,22 +2,27 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Routes from "../../../Constants/Routes";
-const isActive = (route: string) => {
-    return { href: route, current: location.pathname === route };
-};
-const navigation = [
-    { name: "home", ...isActive(Routes.home) },
-    { name: "login", ...isActive(Routes.login) },
-    {
-        name: "register",
-        ...isActive(Routes.register),
-    },
-    {
-        name: "profile",
-        ...isActive(Routes.profile.base),
-    },
-];
+import { NavLink, useLocation } from "react-router-dom";
+
+
 function NavBar() {
+  const location = useLocation();
+  const isActive = (route: string) => {
+      return { href: route, current: location.pathname === route };
+  };
+  const navigation =[
+        { name: "home", ...isActive(Routes.home) },
+        { name: "login", ...isActive(Routes.login) },
+        {
+            name: "register",
+            ...isActive(Routes.register),
+        },
+        {
+            name: "profile",
+            ...isActive(Routes.profile.base),
+        },
+    ]
+
     function classNames(...classes: string[]) {
         return classes.filter(Boolean).join(" ");
     }
@@ -59,22 +64,20 @@ function NavBar() {
                                 <div className="hidden sm:ml-6 sm:block">
                                     <div className="flex space-x-4">
                                         {navigation.map((item) => (
-                                            <a
+                                            <NavLink
                                                 key={item.name}
-                                                href={item.href}
-                                                className={classNames(
-                                                    item.current
+                                                to={item.href}
+                                            className={ `${
+                                                     item.current
                                                         ? "bg-gray-900 text-white"
-                                                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                                                    "rounded-md px-3 py-2 text-sm font-medium"
-                                                )}
+                                                        : "text-gray-300 hover:bg-gray-700 hover:text-white"} rounded-md px-3 py-2 text-sm font-medium`}
                                                 aria-current={
                                                     item.current
                                                         ? "page"
                                                         : undefined
                                                 }>
                                                 {item.name}
-                                            </a>
+                                            </NavLink>
                                         ))}
                                     </div>
                                 </div>
